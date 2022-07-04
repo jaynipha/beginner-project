@@ -73,7 +73,9 @@ app.post('/api/courses', (req , res) => {
     //SERVER RESPONSE
     res.status(201).send({status: true, courses});   
 })
-
+app.put('/api/courses/:id', ( req, res ) => {
+    
+});
 const port = process.env.PORT || 3000 
 app.listen(port, () => console.log(`listening on port ${port}...`))
 
