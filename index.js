@@ -17,11 +17,11 @@ const courses = [
 ];
 
 
-app.get('/', (req, res) =>{
+    app.get('/', (req, res) =>{
     res.status(201).json({status: true, message: 'Hello World'});
 });
 
-app.get('/api/courses', (req, res)=>{
+   app.get('/api/courses', (req, res)=>{
     try {
         res.status(200).json({status: true, data: courses});
     } catch (error) {
@@ -30,7 +30,7 @@ app.get('/api/courses', (req, res)=>{
 });
 
 //request parameter
-app.get('/api/courses/:id', ( req, res ) => {
+ app.get('/api/courses/:id', ( req, res ) => {
     try {
         const data = courses.find((item) => item.id === parseInt(req.params.id));
         if(!data) {
@@ -69,7 +69,7 @@ app.post('/api/courses', (req , res) => {
     if(!!result.error) {
         const message = result.error.details.map(i => i.message).join(',');
 
-        return res.status(400).send({
+           return res.status(400).send({
             status: false, 
             message: message
             
@@ -89,7 +89,7 @@ app.post('/api/courses', (req , res) => {
 
 
 
-app.put('/api/courses/:id', ( req, res ) => {
+        app.put('/api/courses/:id', ( req, res ) => {
         const data = courses.find((item) => item.id === parseInt(req.params.id));
         if(!data) res.status(404).send('the course with the given id was not found');
         //const {error} = validateData(req, body); 
@@ -119,8 +119,8 @@ data.name = req.body.name
 res.send(data);
 
 
-function validateData(data){
-    const schema = {
+     function validateData(data){
+        const schema = {
         name:Joistring().min(3).required()
     };
     return Joivalidate(data, schema)
