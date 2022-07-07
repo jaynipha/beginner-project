@@ -13,6 +13,7 @@ const courses = [
     {id: 3, title: 'English'},
     {id: 4, title: 'physics'},
     {id: 5, title: 'music'},
+    {id: 6, title: 'history'},
 ];
 
 
@@ -87,13 +88,14 @@ app.post('/api/courses', (req , res) => {
 })
 
 
+
 app.put('/api/courses/:id', ( req, res ) => {
         const data = courses.find((item) => item.id === parseInt(req.params.id));
         if(!data) res.status(404).send('the course with the given id was not found');
         //const {error} = validateData(req, body); 
-        res.send(data);
+        res.status(200).json({status: true , message: data});
    //look up the course
-   //if not existing, return 404
+    //if not existing, return 404
 
 
    //validate
