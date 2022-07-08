@@ -1,12 +1,25 @@
 const Joi = require('joi');
-const logger = require ('./logger');
+
 const express = require('express');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const logger = require ('./logger');
+const authenticate = require('./authenticate')
 require('dotenv').config();
 const app = express();
+
+
+console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+console.log(`app: ${app.get ('env')}`);
+
+
 app.use(express.json());
 app.use(logger);
+app.use(helmet());
+app.use(morgan('tiny'));
 
-app.use(authenticate);
+//app.use(authenticate);
+
 const courses = [
     {id: 1, title: 'Math'}, 
     {id: 2, title: 'Geography'}, 
@@ -14,6 +27,7 @@ const courses = [
     {id: 4, title: 'physics'},
     {id: 5, title: 'music'},
     {id: 6, title: 'history'},
+    {id: 7, title: 'biology'},
 ];
 
 
@@ -86,8 +100,6 @@ app.post('/api/courses', (req , res) => {
     //SERVER RESPONSE
     res.status(201).send({status: true, courses});   
 })
-
-
 
         app.put('/api/courses/:id', ( req, res ) => {
         const data = courses.find((item) => item.id === parseInt(req.params.id));
