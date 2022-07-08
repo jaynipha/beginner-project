@@ -1,12 +1,12 @@
 const Joi = require('joi');
+const logger = require ('./logger');
 const express = require('express');
-
 require('dotenv').config();
-
 const app = express();
-
 app.use(express.json());
+app.use(logger);
 
+app.use(authenticate);
 const courses = [
     {id: 1, title: 'Math'}, 
     {id: 2, title: 'Geography'}, 
