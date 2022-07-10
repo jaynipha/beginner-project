@@ -11,6 +11,8 @@ const authenticate = require('./authenticate')
 require('dotenv').config();
 const app = express();
 
+app.set('view engine','pug');
+app.set('views', './views')
 
 // console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 // console.log(`app: ${app.get ('env')}`);
@@ -30,11 +32,6 @@ app.use(helmet());
 console.log('Application name:' + config.get('name'));
 console.log('mail server' + config.get('mail.host'));
 console.log('mail password' + config.get('mail.password'));
-
-
-
-
-
 
 
 //app.use(authenticate);
