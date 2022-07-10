@@ -1,3 +1,6 @@
+const startupDebugger = require('debug')('app:startup');
+const dbDebugger = require('debug') ('app:db')
+const config = require('config');
 const Joi = require('joi');
 
 const express = require('express');
@@ -9,14 +12,30 @@ require('dotenv').config();
 const app = express();
 
 
-console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
-console.log(`app: ${app.get ('env')}`);
+// console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+// console.log(`app: ${app.get ('env')}`);
 
 
+if(app.get('env')==='development'){
+    app.use(morgan('tiny'));
+    startupDebugger('morgan enabled');
+
+};
 app.use(express.json());
 app.use(logger);
 app.use(helmet());
-app.use(morgan('tiny'));
+
+
+//CONFIGURATION
+console.log('Application name:' + config.get('name'));
+console.log('mail server' + config.get('mail.host'));
+console.log('mail password' + config.get('mail.password'));
+
+
+
+
+
+
 
 //app.use(authenticate);
 
