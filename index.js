@@ -2,11 +2,12 @@ const startupDebugger = require('debug')('app:startup');
 const dbDebugger = require('debug') ('app:db')
 const config = require('config');
 const Joi = require('joi');
-
+const courses = require('./routes/courses');
 const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const logger = require ('./logger');
+const logger = require ('./middleware/logger');
+const route = require ('./routes/route');
 const authenticate = require('./authenticate')
 require('dotenv').config();
 const app = express();
@@ -26,6 +27,8 @@ if(app.get('env')==='development'){
 app.use(express.json());
 app.use(logger);
 app.use(helmet());
+app.use('/api/courses', courses);
+app.use('/', route);
 
 
 //CONFIGURATION
@@ -39,3 +42,5 @@ console.log('mail password' + config.get('mail.password'));
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`listening on port ${port}...`))
 
+
+module.exports = router;
