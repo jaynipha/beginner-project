@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router= express.Router();
 const courses = [
@@ -125,3 +126,4 @@ router.post('/api/courses', (req , res) => {
      res.status(200).send(data);
      //return the same course
  });
+module.exports = router;

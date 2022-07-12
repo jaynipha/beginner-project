@@ -6,8 +6,7 @@ const courses = require('./routes/courses');
 const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const logger = require ('./middleware/logger');
-const route = require ('./routes/route');
+const route = require('./routes/route');
 const authenticate = require('./authenticate')
 require('dotenv').config();
 const app = express();
@@ -25,16 +24,15 @@ if(app.get('env')==='development'){
 
 };
 app.use(express.json());
-app.use(logger);
 app.use(helmet());
-app.use('/api/courses', courses);
-app.use('/', route);
+app.use('/api/courses/', courses);
+ app.use('/sad', route);
 
 
 //CONFIGURATION
-console.log('Application name:' + config.get('name'));
-console.log('mail server' + config.get('mail.host'));
-console.log('mail password' + config.get('mail.password'));
+// console.log('Application name:' + config.get('name'));
+// console.log('mail server' + config.get('mail.host'));
+// console.log('mail password' + config.get('mail.password'));
 
 
 //app.use(authenticate);
@@ -43,4 +41,3 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`listening on port ${port}...`))
 
 
-module.exports = router;

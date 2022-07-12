@@ -1,8 +1,8 @@
 const express = require('express');
 const router= express.Router();
 
-router.get('/', (req, res) =>{
-    res.render('index', {title: 'My Express App', message:'hello'})
+router.get('/jennifer', (req, res) =>{
+    res.send({title: 'My Express App', message:'hello'})
 });
 
 module.exports = router;
