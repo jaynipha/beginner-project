@@ -1,25 +1,35 @@
-getUser(1, (user)=>
-{
-    getRepositories(user.githubUsername, getCommits)
-      
-    });
-
+console.log('before');
+getUser(1, getRepositories)
 console.log('After');
+
 
 function displayCommits(commits){
     console.log(commits);
 }
 
+function getRepositories(user){
+    getRepositories(user.githubUsername, getCommits)
+      
+}
+
 function getCommits(repos){
     getCommits(repo, displayCommits);
 }
+
 function getUser(id, callback){
     setTimeout(()=>{
         console.log('Reading a user from a database . . . ')
         callback({id:id, githubUsername:'mosh'})
     }, 2000)
 }
-
+//async await
+async function displayCommits(){
+    const user = await getUser(1);
+    const repos = await getRepositories(user, githubUsername);
+    const commits = await getCommits(repos[0]);
+    console.log(commits);
+}
+displayCommits();
 
 
 
